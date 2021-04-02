@@ -52,11 +52,9 @@ namespace VideoLoopScreensaver
 			}
 			else
 			{
-				DialogResult result = MessageBox.Show("The video file path you entered does not exist.", Program.ErrorDialogTitle, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+				DialogResult result = MessageBox.Show("The video file path you entered does not exist. Are you sure you want to continue?", Program.ErrorDialogTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				if (result == DialogResult.Abort)
-					Close();
-				else if (result == DialogResult.Ignore)
+				if (result == DialogResult.OK)
 					SaveAndClose();
 			}
 		}
