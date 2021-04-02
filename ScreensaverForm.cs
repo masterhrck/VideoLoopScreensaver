@@ -9,8 +9,6 @@ namespace VideoLoopScreensaver
 {
 	public partial class ScreensaverForm : Form
 	{
-		public const string errorDialogTitle = "Video Loop Screensaver";
-
 		private MpvPlayer player;
 		private Point startMousePos = Point.Empty;
 		private bool mouseInit = true;
@@ -25,7 +23,7 @@ namespace VideoLoopScreensaver
 			Cursor.Hide();
 
 			KeyDown += (object sender, KeyEventArgs e) => Application.Exit();
-			if (Properties.Settings.Default.mouseExit)
+			if (Program.Settings.ExitOnMouse)
 			{
 				MouseMove += ScreensaverForm_MouseMove;
 			}
@@ -55,9 +53,9 @@ namespace VideoLoopScreensaver
 
 		private void InitVideo()
 		{
-			if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.videoFilePath))
+			if (!string.IsNullOrWhiteSpace(Program.Settings.VideoFilePath))
 			{
-				if (File.Exists(Properties.Settings.Default.videoFilePath))
+				if (File.Exists(Program.Settings.VideoFilePath))
 				{
 					Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -66,27 +64,27 @@ namespace VideoLoopScreensaver
 						player = new MpvPlayer(this.Handle)
 						{
 							Loop = true,
-							Volume = Properties.Settings.Default.volume
+							Volume = Program.Settings.Volume
 						};
 					}
 					catch
 					{
-						MessageBox.Show("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", errorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						MessageBox.Show("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						Environment.Exit(1);
 					}
 
-					player.Load(Properties.Settings.Default.videoFilePath);
+					player.Load(Program.Settings.VideoFilePath);
 					player.Resume();
 				}
 				else
 				{
-					MessageBox.Show($"Cannot find video file \"{Properties.Settings.Default.videoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.", errorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Environment.Exit(1);
 				}
 			}
 			else
 			{
-				MessageBox.Show("Video file not set. Please select a video file in screensaver settings.", errorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Video file not set. Please select a video file in screensaver settings.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Environment.Exit(1);
 			}
 		}

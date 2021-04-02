@@ -12,10 +12,11 @@ namespace VideoLoopScreensaver
 		{
 			InitializeComponent();
 
-			textBoxVideoPath.Text = Properties.Settings.Default.videoFilePath;
-			trackBarVolume.Value = Properties.Settings.Default.volume;
-			checkBoxMouseExit.Checked = Properties.Settings.Default.mouseExit;
+			textBoxVideoPath.Text = Program.Settings.VideoFilePath;
+			trackBarVolume.Value = Program.Settings.Volume;
+			checkBoxMouseExit.Checked = Program.Settings.ExitOnMouse;
 
+			checkBoxVolumeMute.Checked = trackBarVolume.Value == 0;
 		}
 
 		private void buttonBrowse_Click(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace VideoLoopScreensaver
 			}
 			else
 			{
-				DialogResult result = MessageBox.Show("The video file path you entered does not exist.", ScreensaverForm.errorDialogTitle, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+				DialogResult result = MessageBox.Show("The video file path you entered does not exist.", Program.ErrorDialogTitle, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
 
 				if (result == DialogResult.Abort)
 					Close();
@@ -62,10 +63,9 @@ namespace VideoLoopScreensaver
 
 		private void SaveAndClose()
 		{
-			Properties.Settings.Default.videoFilePath = textBoxVideoPath.Text;
-			Properties.Settings.Default.volume = trackBarVolume.Value;
-			Properties.Settings.Default.mouseExit = checkBoxMouseExit.Checked;
-			Properties.Settings.Default.Save();
+			Program.Settings.VideoFilePath = textBoxVideoPath.Text;
+			Program.Settings.Volume = trackBarVolume.Value;
+			Program.Settings.ExitOnMouse = checkBoxMouseExit.Checked;
 
 			Close();
 		}
