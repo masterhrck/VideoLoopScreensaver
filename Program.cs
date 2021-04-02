@@ -39,7 +39,7 @@ namespace VideoLoopScreensaver
 			{
 				if (handle == "")
 				{
-					MessageBox.Show("Error: window handle was not provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Error: window handle was not provided.", ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Environment.Exit(1);
 				}
 

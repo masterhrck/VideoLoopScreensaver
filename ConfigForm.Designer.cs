@@ -167,7 +167,7 @@ namespace VideoLoopScreensaver
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.MaximizeBox = false;
 			this.Name = "ConfigForm";
-			this.Text = "Configuration";
+			this.Text = "Video Loop Screensaver";
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
 			this.groupBoxVideoPath.ResumeLayout(false);
 			this.groupBoxVideoPath.PerformLayout();
