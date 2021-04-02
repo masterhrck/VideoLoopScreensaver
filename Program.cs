@@ -46,7 +46,8 @@ namespace VideoLoopScreensaver
 				IntPtr previewWndHandle = new IntPtr(long.Parse(handle));
 				Application.Run(new ScreensaverForm(previewWndHandle));
 			}
-			else if(flag=="/s")
+			//Fullscreen mode
+			else if (flag == "/s")
 			{
 				Application.Run(new ScreensaverForm());
 			}
@@ -55,8 +56,6 @@ namespace VideoLoopScreensaver
 			{
 				Application.Run(new ConfigForm());
 			}
-			//Fullscreen mode
-			
 		}
 	}
 }
