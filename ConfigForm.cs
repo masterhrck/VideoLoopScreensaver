@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace VideoLoopScreensaver
@@ -43,6 +44,23 @@ namespace VideoLoopScreensaver
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
+		{
+			if (File.Exists(textBoxVideoPath.Text))
+			{
+				SaveAndClose();
+			}
+			else
+			{
+				DialogResult result = MessageBox.Show("The video file path you entered does not exist.", ScreensaverForm.errorDialogTitle, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+
+				if (result == DialogResult.Abort)
+					Close();
+				else if (result == DialogResult.Ignore)
+					SaveAndClose();
+			}
+		}
+
+		private void SaveAndClose()
 		{
 			Properties.Settings.Default.videoFilePath = textBoxVideoPath.Text;
 			Properties.Settings.Default.volume = trackBarVolume.Value;
