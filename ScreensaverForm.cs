@@ -23,10 +23,10 @@ namespace VideoLoopScreensaver
 			Cursor.Hide();
 
 			KeyDown += (object sender, KeyEventArgs e) => Application.Exit();
+			MouseDown += (object sender, MouseEventArgs e) => Application.Exit();
+
 			if (Program.Settings.ExitOnMouse)
-			{
 				MouseMove += ScreensaverForm_MouseMove;
-			}
 
 			InitVideo();
 		}
