@@ -37,13 +37,17 @@ namespace VideoLoopScreensaver
 			//Preview mode
 			if (flag == "/p")
 			{
-				if (handle == "")
+				IntPtr previewWndHandle = IntPtr.Zero;
+
+				try
 				{
-					MessageBox.Show("Error: window handle was not provided.", ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					previewWndHandle = new IntPtr(long.Parse(handle));
+				}
+				catch
+				{
 					Environment.Exit(1);
 				}
 
-				IntPtr previewWndHandle = new IntPtr(long.Parse(handle));
 				Application.Run(new ScreensaverForm(previewWndHandle));
 			}
 			//Fullscreen mode

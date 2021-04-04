@@ -12,6 +12,7 @@ namespace VideoLoopScreensaver
 		private MpvPlayer player;
 		private Point startMousePos = Point.Empty;
 		private bool mouseInit = true;
+		private bool previewMode = false;
 
 		//Fullscreen mode
 		public ScreensaverForm()
@@ -48,6 +49,7 @@ namespace VideoLoopScreensaver
 			Size = ParentRect.Size;
 			Location = new Point(0, 0);
 
+			previewMode = true;
 			InitVideo();
 		}
 
@@ -69,8 +71,7 @@ namespace VideoLoopScreensaver
 					}
 					catch
 					{
-						MessageBox.Show("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-						Environment.Exit(1);
+						FatalError("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", showInPreview : true);
 					}
 
 					player.Load(Program.Settings.VideoFilePath);
@@ -78,14 +79,12 @@ namespace VideoLoopScreensaver
 				}
 				else
 				{
-					MessageBox.Show($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					Environment.Exit(1);
+					FatalError($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
 				}
 			}
 			else
 			{
-				MessageBox.Show("Video file not set. Please select a video file in screensaver settings.", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Environment.Exit(1);
+				FatalError("Video file not set. Please select a video file in screensaver settings.");
 			}
 		}
 
@@ -103,6 +102,16 @@ namespace VideoLoopScreensaver
 			{
 				return (int)Math.Sqrt(Math.Pow(pointA.X - pointB.X, 2) + Math.Pow(pointA.Y - pointB.Y, 2));
 			}
+		}
+
+		private void FatalError(string message, bool showInPreview = false)
+		{
+			if (!previewMode || showInPreview)
+			{
+				Cursor.Show();
+				MessageBox.Show(message, Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			Environment.Exit(1);
 		}
 
 	}
