@@ -76,6 +76,9 @@ namespace VideoLoopScreensaver
 				FatalError("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", showInPreview: true);
 			}
 
+			player.MediaError += (object sender, EventArgs e) =>
+				FatalError("Failed to load video. Make sure you selected a valid video file. Otherwise, the player doesn't support that video format.");
+
 			player.Load(Program.Settings.VideoFilePath);
 			player.Resume();
 		}
@@ -105,6 +108,5 @@ namespace VideoLoopScreensaver
 			}
 			Environment.Exit(1);
 		}
-
 	}
 }
