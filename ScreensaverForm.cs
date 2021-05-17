@@ -55,37 +55,32 @@ namespace VideoLoopScreensaver
 
 		private void InitVideo()
 		{
-			if (!string.IsNullOrWhiteSpace(Program.Settings.VideoFilePath))
-			{
-				if (File.Exists(Program.Settings.VideoFilePath))
-				{
-					Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-					try
-					{
-						player = new MpvPlayer(this.Handle)
-						{
-							Loop = true,
-							Volume = Program.Settings.Volume
-						};
-					}
-					catch
-					{
-						FatalError("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", showInPreview : true);
-					}
-
-					player.Load(Program.Settings.VideoFilePath);
-					player.Resume();
-				}
-				else
-				{
-					FatalError($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
-				}
-			}
-			else
-			{
+			if (string.IsNullOrWhiteSpace(Program.Settings.VideoFilePath))
 				FatalError("Video file not set. Please select a video file in screensaver settings.");
+
+			if (!File.Exists(Program.Settings.VideoFilePath))
+				FatalError($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
+
+			Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+			try
+			{
+				player = new MpvPlayer(this.Handle)
+				{
+					Loop = true,
+					Volume = Program.Settings.Volume
+				};
 			}
+			catch
+			{
+				FatalError("Failed to initialize MVP player. Make sure mvp-1.dll is in the same directory as VideoLoopScreensaver.scr or in \"libs\" subfolder.", showInPreview: true);
+			}
+
+			player.MediaError += (object sender, EventArgs e) =>
+				FatalError("Failed to load video. Make sure you selected a valid video file. Otherwise, the player doesn't support that video format.");
+
+			player.Load(Program.Settings.VideoFilePath);
+			player.Resume();
 		}
 
 		private void ScreensaverForm_MouseMove(object sender, MouseEventArgs e)
@@ -113,6 +108,5 @@ namespace VideoLoopScreensaver
 			}
 			Environment.Exit(1);
 		}
-
 	}
 }
