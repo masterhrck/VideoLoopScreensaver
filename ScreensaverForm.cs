@@ -11,7 +11,6 @@ namespace VideoLoopScreensaver
 	{
 		private MpvPlayer player;
 		private Point startMousePos = Point.Empty;
-		private bool mouseInit = true;
 		private bool previewMode = false;
 
 		//Fullscreen mode
@@ -27,7 +26,10 @@ namespace VideoLoopScreensaver
 			MouseDown += (object sender, MouseEventArgs e) => Application.Exit();
 
 			if (Program.Settings.ExitOnMouse)
+			{
+				startMousePos = MousePosition;
 				MouseMove += ScreensaverForm_MouseMove;
+			}
 
 			InitVideo();
 		}
@@ -85,12 +87,7 @@ namespace VideoLoopScreensaver
 
 		private void ScreensaverForm_MouseMove(object sender, MouseEventArgs e)
 		{
-			if (mouseInit)
-			{
-				mouseInit = false;
-				startMousePos = e.Location;
-			}
-			else if (PointDistance(e.Location, startMousePos) > 5)
+			if (PointDistance(e.Location, startMousePos) > 5)
 				Application.Exit();
 
 			int PointDistance(Point pointA, Point pointB)
