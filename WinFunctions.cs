@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -17,5 +18,17 @@ namespace VideoLoopScreensaver
 
 		[DllImport("user32.dll")]
 		public static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
+
+		[DllImport("user32.dll")]
+		static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+		
+		public static void MonitorOff()
+		{
+			const int WmSyscommand = 0x0112;
+			const int ScMonitorpower = 0xF170;
+			const int MonitorShutoff = 2;
+
+			SendMessage(new Form().Handle, WmSyscommand, ScMonitorpower, MonitorShutoff);
+		}
 	}
 }

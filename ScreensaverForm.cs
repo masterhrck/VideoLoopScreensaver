@@ -31,6 +31,19 @@ namespace VideoLoopScreensaver
 				MouseMove += ScreensaverForm_MouseMove;
 			}
 
+			if (Program.Settings.TimerEnabled)
+			{
+				Timer timer = new Timer{
+					Interval = Program.Settings.TimerMinutes * 60000,
+					Enabled = true
+				};
+
+				timer.Tick += (object sender, EventArgs e) => {
+					WinFunctions.MonitorOff();
+					Application.Exit();
+				};
+			}
+
 			InitVideo();
 		}
 

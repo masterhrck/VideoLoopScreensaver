@@ -12,5 +12,11 @@ namespace VideoLoopScreensaver
 
 		[Option(DefaultValue = true)]
 		bool ExitOnMouse { get; set; }
+
+		[Option(DefaultValue = false)]
+		bool TimerEnabled { get; set; }
+
+		[Option(DefaultValue = 10)]
+		int TimerMinutes { get; set; }
 	}
 }
