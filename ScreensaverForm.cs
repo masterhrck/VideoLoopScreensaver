@@ -67,8 +67,7 @@ namespace VideoLoopScreensaver
 
 			try
 			{
-				player = new MpvPlayer(this.Handle)
-				{
+				player = new MpvPlayer(this.Handle) {
 					Loop = true,
 					Volume = Program.Settings.Volume
 				};

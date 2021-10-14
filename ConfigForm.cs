@@ -46,17 +46,15 @@ namespace VideoLoopScreensaver
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			if (File.Exists(textBoxVideoPath.Text))
-			{
-				SaveAndClose();
-			}
-			else
+			if (!File.Exists(textBoxVideoPath.Text))
 			{
 				DialogResult result = MessageBox.Show("The video file path you entered does not exist. Are you sure you want to continue?", Program.ErrorDialogTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				if (result == DialogResult.OK)
-					SaveAndClose();
+				if (result == DialogResult.Cancel)
+					return;
 			}
+
+			SaveAndClose();
 		}
 
 		private void SaveAndClose()
