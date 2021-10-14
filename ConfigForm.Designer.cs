@@ -130,7 +130,7 @@ namespace VideoLoopScreensaver
 			// 
 			// buttonSave
 			// 
-			this.buttonSave.Location = new System.Drawing.Point(322, 228);
+			this.buttonSave.Location = new System.Drawing.Point(327, 208);
 			this.buttonSave.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(70, 24);
@@ -142,7 +142,7 @@ namespace VideoLoopScreensaver
 			// buttonCancel
 			// 
 			this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonCancel.Location = new System.Drawing.Point(397, 228);
+			this.buttonCancel.Location = new System.Drawing.Point(402, 208);
 			this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(70, 24);
@@ -198,7 +198,7 @@ namespace VideoLoopScreensaver
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(483, 268);
+			this.ClientSize = new System.Drawing.Size(483, 243);
 			this.Controls.Add(this.labelTimer);
 			this.Controls.Add(this.checkBoxTimer);
 			this.Controls.Add(this.numericTimer);
