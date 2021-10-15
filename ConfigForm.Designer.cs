@@ -55,6 +55,7 @@ namespace VideoLoopScreensaver
 			this.textBoxVideoPath.Name = "textBoxVideoPath";
 			this.textBoxVideoPath.Size = new System.Drawing.Size(368, 20);
 			this.textBoxVideoPath.TabIndex = 0;
+			this.textBoxVideoPath.Leave += new System.EventHandler(this.textBoxVideoPath_Leave);
 			// 
 			// buttonBrowse
 			// 

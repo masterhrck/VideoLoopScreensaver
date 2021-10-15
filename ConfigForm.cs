@@ -81,5 +81,10 @@ namespace VideoLoopScreensaver
 		{
 			Close();
 		}
+
+		private void textBoxVideoPath_Leave(object sender, EventArgs e)
+		{
+			textBoxVideoPath.Text = textBoxVideoPath.Text.Trim().Trim('\"');
+		}
 	}
 }
