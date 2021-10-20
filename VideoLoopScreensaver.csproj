@@ -81,6 +81,9 @@
     <Reference Include="Mpv.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Mpv.NET.1.2.0\lib\netstandard2.0\Mpv.NET.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
@@ -260,6 +263,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="Xabe.FFmpeg, Version=5.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Xabe.FFmpeg.5.0.2\lib\netstandard2.0\Xabe.FFmpeg.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigForm.cs">
@@ -267,6 +273,12 @@
     </Compile>
     <Compile Include="ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConvertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConvertForm.Designer.cs">
+      <DependentUpon>ConvertForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ISettings.cs" />
     <Compile Include="Program.cs" />
@@ -280,6 +292,9 @@
     <Compile Include="WinFunctions.cs" />
     <EmbeddedResource Include="ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConvertForm.resx">
+      <DependentUpon>ConvertForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScreensaverForm.resx">
       <DependentUpon>ScreensaverForm.cs</DependentUpon>

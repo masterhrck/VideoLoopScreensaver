@@ -42,6 +42,7 @@ namespace VideoLoopScreensaver
 			this.numericTimer = new System.Windows.Forms.NumericUpDown();
 			this.checkBoxTimer = new System.Windows.Forms.CheckBox();
 			this.labelTimer = new System.Windows.Forms.Label();
+			this.checkBoxConversion = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
 			this.groupBoxVideoPath.SuspendLayout();
 			this.groupBoxVolume.SuspendLayout();
@@ -121,7 +122,7 @@ namespace VideoLoopScreensaver
 			this.checkBoxMouseExit.AutoSize = true;
 			this.checkBoxMouseExit.Checked = true;
 			this.checkBoxMouseExit.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxMouseExit.Location = new System.Drawing.Point(9, 136);
+			this.checkBoxMouseExit.Location = new System.Drawing.Point(9, 161);
 			this.checkBoxMouseExit.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxMouseExit.Name = "checkBoxMouseExit";
 			this.checkBoxMouseExit.Size = new System.Drawing.Size(207, 17);
@@ -158,7 +159,7 @@ namespace VideoLoopScreensaver
 			// 
 			// numericTimer
 			// 
-			this.numericTimer.Location = new System.Drawing.Point(142, 157);
+			this.numericTimer.Location = new System.Drawing.Point(142, 182);
 			this.numericTimer.Minimum = new decimal(new int[] {
             1,
             0,
@@ -176,7 +177,7 @@ namespace VideoLoopScreensaver
 			// checkBoxTimer
 			// 
 			this.checkBoxTimer.AutoSize = true;
-			this.checkBoxTimer.Location = new System.Drawing.Point(9, 158);
+			this.checkBoxTimer.Location = new System.Drawing.Point(9, 183);
 			this.checkBoxTimer.Name = "checkBoxTimer";
 			this.checkBoxTimer.Size = new System.Drawing.Size(133, 17);
 			this.checkBoxTimer.TabIndex = 9;
@@ -187,11 +188,21 @@ namespace VideoLoopScreensaver
 			// labelTimer
 			// 
 			this.labelTimer.AutoSize = true;
-			this.labelTimer.Location = new System.Drawing.Point(192, 159);
+			this.labelTimer.Location = new System.Drawing.Point(192, 184);
 			this.labelTimer.Name = "labelTimer";
 			this.labelTimer.Size = new System.Drawing.Size(43, 13);
 			this.labelTimer.TabIndex = 10;
 			this.labelTimer.Text = "minutes";
+			// 
+			// checkBoxConvertEnabled
+			// 
+			this.checkBoxConversion.AutoSize = true;
+			this.checkBoxConversion.Location = new System.Drawing.Point(9, 139);
+			this.checkBoxConversion.Name = "checkBoxConvertEnabled";
+			this.checkBoxConversion.Size = new System.Drawing.Size(185, 17);
+			this.checkBoxConversion.TabIndex = 11;
+			this.checkBoxConversion.Text = "Optimize video for faster playback";
+			this.checkBoxConversion.UseVisualStyleBackColor = true;
 			// 
 			// ConfigForm
 			// 
@@ -200,6 +211,7 @@ namespace VideoLoopScreensaver
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(483, 243);
+			this.Controls.Add(this.checkBoxConversion);
 			this.Controls.Add(this.labelTimer);
 			this.Controls.Add(this.checkBoxTimer);
 			this.Controls.Add(this.numericTimer);
@@ -239,5 +251,6 @@ namespace VideoLoopScreensaver
 		private System.Windows.Forms.NumericUpDown numericTimer;
 		private System.Windows.Forms.CheckBox checkBoxTimer;
 		private System.Windows.Forms.Label labelTimer;
+		private System.Windows.Forms.CheckBox checkBoxConversion;
 	}
 }

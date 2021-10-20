@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Xabe.FFmpeg;
 
 namespace VideoLoopScreensaver
 {
@@ -116,6 +117,13 @@ namespace VideoLoopScreensaver
 				MessageBox.Show(message, Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			Environment.Exit(1);
+		}
+
+		private async void Test()
+		{
+			string inputFile = "";
+			string outputFile = "";
+			IConversionResult result = await FFmpeg.Conversions.New().Start($"-i \"{inputFile}\" -c:v libx264 -profile:v baseline \"{outputFile}.mp4\"");
 		}
 	}
 }

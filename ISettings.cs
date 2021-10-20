@@ -18,5 +18,14 @@ namespace VideoLoopScreensaver
 
 		[Option(DefaultValue = 10)]
 		int TimerMinutes { get; set; }
+
+		[Option(DefaultValue = true)]
+		bool EnableConversion { get; set; }
+
+		[Option(DefaultValue = "")]
+		string SelectedVideoLastMD5 { get; set; }
+
+		[Option(DefaultValue = "")]
+		string PlaybackVideoPath { get; set; }
 	}
 }
