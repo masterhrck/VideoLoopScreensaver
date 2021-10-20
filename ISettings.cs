@@ -5,7 +5,7 @@ namespace VideoLoopScreensaver
 	public interface ISettings
 	{
 		[Option(DefaultValue = "")]
-		string VideoFilePath { get; set; }
+		string SelectedVideoPath { get; set; }
 
 		[Option(DefaultValue = 100)]
 		int Volume { get; set; }
@@ -14,7 +14,7 @@ namespace VideoLoopScreensaver
 		bool ExitOnMouse { get; set; }
 
 		[Option(DefaultValue = false)]
-		bool TimerEnabled { get; set; }
+		bool EnableTimer { get; set; }
 
 		[Option(DefaultValue = 10)]
 		int TimerMinutes { get; set; }

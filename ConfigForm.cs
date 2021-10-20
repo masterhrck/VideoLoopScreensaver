@@ -15,11 +15,11 @@ namespace VideoLoopScreensaver
 			InitializeComponent();
 			numericTimer.Maximum = decimal.MaxValue;
 
-			textBoxVideoPath.Text = Program.Settings.VideoFilePath;
+			textBoxVideoPath.Text = Program.Settings.SelectedVideoPath;
 			trackBarVolume.Value = Program.Settings.Volume;
 			checkBoxMouseExit.Checked = Program.Settings.ExitOnMouse;
 			numericTimer.Value = Program.Settings.TimerMinutes;
-			checkBoxTimer.Checked = Program.Settings.TimerEnabled;
+			checkBoxTimer.Checked = Program.Settings.EnableTimer;
 			checkBoxConversion.Checked = Program.Settings.EnableConversion;
 
 			checkBoxVolumeMute.Checked = trackBarVolume.Value == 0;
@@ -61,7 +61,7 @@ namespace VideoLoopScreensaver
 			//Validate input
 			if (!File.Exists(textBoxVideoPath.Text))
 			{
-				DialogResult result = MessageBox.Show("The video file path you entered does not exist. Are you sure you want to continue?", Program.ErrorDialogTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+				DialogResult result = MessageBox.Show("The video file path you entered does not exist. Are you sure you want to continue?", Program.DialogTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 				if (result == DialogResult.Cancel)
 					return;
@@ -87,10 +87,10 @@ namespace VideoLoopScreensaver
 
 
 			//Save settings
-			Program.Settings.VideoFilePath = textBoxVideoPath.Text;
+			Program.Settings.SelectedVideoPath = textBoxVideoPath.Text;
 			Program.Settings.Volume = trackBarVolume.Value;
 			Program.Settings.ExitOnMouse = checkBoxMouseExit.Checked;
-			Program.Settings.TimerEnabled = checkBoxTimer.Checked;
+			Program.Settings.EnableTimer = checkBoxTimer.Checked;
 			Program.Settings.TimerMinutes = (int)numericTimer.Value;
 			Program.Settings.EnableConversion = checkBoxConversion.Checked;
 

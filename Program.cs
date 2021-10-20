@@ -6,7 +6,7 @@ namespace VideoLoopScreensaver
 {
 	static class Program
 	{
-		public const string ErrorDialogTitle = "Video Loop Screensaver";
+		public const string DialogTitle = "Video Loop Screensaver";
 		public static ISettings Settings = new ConfigurationBuilder<ISettings>().UseIniFile(Application.UserAppDataPath + @"\settings.ini").Build();
 
 		[STAThread]

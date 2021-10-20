@@ -74,7 +74,7 @@ namespace VideoLoopScreensaver
 				if (File.Exists(tempOutputFilePath))
 					File.Delete(tempOutputFilePath);
 
-				MessageBox.Show("Video conversion failed!", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Video conversion failed!", Program.DialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 			}
 		}
@@ -125,7 +125,7 @@ namespace VideoLoopScreensaver
 
 			void Failed()
 			{
-				MessageBox.Show("Video verification failed!", Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Video verification failed!", Program.DialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 			}
 		}

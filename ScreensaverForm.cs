@@ -32,7 +32,7 @@ namespace VideoLoopScreensaver
 				MouseMove += ScreensaverForm_MouseMove;
 			}
 
-			if (Program.Settings.TimerEnabled)
+			if (Program.Settings.EnableTimer)
 			{
 				Timer timer = new Timer{
 					Interval = Program.Settings.TimerMinutes * 60000,
@@ -71,11 +71,11 @@ namespace VideoLoopScreensaver
 
 		private void InitVideo()
 		{
-			if (string.IsNullOrWhiteSpace(Program.Settings.VideoFilePath))
+			if (string.IsNullOrWhiteSpace(Program.Settings.SelectedVideoPath))
 				FatalError("Video file not set. Please select a video file in screensaver settings.");
 
-			if (!File.Exists(Program.Settings.VideoFilePath))
-				FatalError($"Cannot find video file \"{Program.Settings.VideoFilePath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
+			if (!File.Exists(Program.Settings.SelectedVideoPath))
+				FatalError($"Cannot find video file \"{Program.Settings.SelectedVideoPath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
 
 			Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -94,7 +94,7 @@ namespace VideoLoopScreensaver
 			player.MediaError += (object sender, EventArgs e) =>
 				FatalError("Failed to load video. Make sure you selected a valid video file. Otherwise, the player doesn't support that video format.");
 
-			player.Load(Program.Settings.VideoFilePath);
+			player.Load(Program.Settings.SelectedVideoPath);
 			player.Resume();
 		}
 
@@ -114,7 +114,7 @@ namespace VideoLoopScreensaver
 			if (!previewMode || showInPreview)
 			{
 				Cursor.Show();
-				MessageBox.Show(message, Program.ErrorDialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(message, Program.DialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			Environment.Exit(1);
 		}
