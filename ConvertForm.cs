@@ -21,9 +21,9 @@ namespace VideoLoopScreensaver
 			InitializeComponent();
 
 			if (enableConversion)
-				Convert(inputFilePath);
+				ConvertAndStore(inputFilePath);
 			else
-				Verify(inputFilePath);
+				VerifyAndStore(inputFilePath);
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace VideoLoopScreensaver
 			Close();
 		}
 
-		private async void Convert(string inputVideoPath)
+		private async void ConvertAndStore(string inputVideoPath)
 		{
 			label.Text = "Optimizing video, please wait...";
 
@@ -88,7 +88,7 @@ namespace VideoLoopScreensaver
 				}));
 		}
 
-		private async void Verify(string inputVideoPath)
+		private async void VerifyAndStore(string inputVideoPath)
 		{
 			label.Text = "Verifying video, please wait...";
 

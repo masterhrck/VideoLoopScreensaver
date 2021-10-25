@@ -15,7 +15,7 @@ namespace VideoLoopScreensaver
 			InitializeComponent();
 			numericTimer.Maximum = decimal.MaxValue;
 
-			textBoxVideoPath.Text = Program.Settings.SelectedVideoPath;
+			textBoxStoredVideo.Text = Path.GetFileName(Program.Settings.PlaybackVideoPath);
 			trackBarVolume.Value = Program.Settings.Volume;
 			checkBoxMouseExit.Checked = Program.Settings.ExitOnMouse;
 			numericTimer.Value = Program.Settings.TimerMinutes;
@@ -26,11 +26,29 @@ namespace VideoLoopScreensaver
 			numericTimer.Enabled = checkBoxTimer.Checked;
 		}
 
-		private void buttonBrowse_Click(object sender, EventArgs e)
+		private void buttonChange_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.FileName = textBoxVideoPath.Text;
-			openFileDialog1.ShowDialog();
-			textBoxVideoPath.Text = openFileDialog1.FileName;
+			if (openFileDialogChange.ShowDialog() != DialogResult.OK)
+				return;
+
+			//Store video
+			using (MD5 md5 = MD5.Create())
+			using (FileStream file = File.OpenRead(openFileDialogChange.FileName))
+			{
+				string hash = Convert.ToBase64String(md5.ComputeHash(file));
+
+				if (hash != Program.Settings.SelectedVideoLastMD5 || Program.Settings.EnableConversion != checkBoxConversion.Checked)
+				{
+					//New video file detected or optimization setting changed
+
+					DialogResult result = (new ConvertForm(openFileDialogChange.FileName, checkBoxConversion.Checked)).ShowDialog();
+					if (result == DialogResult.Cancel)
+						return;
+
+					Program.Settings.SelectedVideoLastMD5 = hash;
+					textBoxStoredVideo.Text = Path.GetFileName(Program.Settings.PlaybackVideoPath);
+				}
+			}
 		}
 
 		private void trackBarVolume_Scroll(object sender, EventArgs e)
@@ -56,55 +74,19 @@ namespace VideoLoopScreensaver
 			numericTimer.Enabled = checkBoxTimer.Checked;
 		}
 
-		private void buttonSave_Click(object sender, EventArgs e)
+		private void buttonClose_Click(object sender, EventArgs e)
 		{
-			//Validate input
-			if (!File.Exists(textBoxVideoPath.Text))
-			{
-				DialogResult result = MessageBox.Show("The video file path you entered does not exist. Are you sure you want to continue?", Program.DialogTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+			Close();
+		}
 
-				if (result == DialogResult.Cancel)
-					return;
-			}
-
-			//Store video
-			using (MD5 md5 = MD5.Create())
-			using (FileStream file = File.OpenRead(textBoxVideoPath.Text))
-			{
-				string hash = Convert.ToBase64String(md5.ComputeHash(file));
-
-				if (hash != Program.Settings.SelectedVideoLastMD5 || Program.Settings.EnableConversion != checkBoxConversion.Checked)
-				{
-					//New video file detected or optimization setting changed
-
-					DialogResult result = (new ConvertForm(textBoxVideoPath.Text, checkBoxConversion.Checked)).ShowDialog();
-					if (result == DialogResult.Cancel)
-						return;
-
-					Program.Settings.SelectedVideoLastMD5 = hash;
-				}
-			}
-
-
+		private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
 			//Save settings
-			Program.Settings.SelectedVideoPath = textBoxVideoPath.Text;
 			Program.Settings.Volume = trackBarVolume.Value;
 			Program.Settings.ExitOnMouse = checkBoxMouseExit.Checked;
 			Program.Settings.EnableTimer = checkBoxTimer.Checked;
 			Program.Settings.TimerMinutes = (int)numericTimer.Value;
 			Program.Settings.EnableConversion = checkBoxConversion.Checked;
-
-			Close();
-		}
-
-		private void buttonCancel_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-
-		private void textBoxVideoPath_Leave(object sender, EventArgs e)
-		{
-			textBoxVideoPath.Text = textBoxVideoPath.Text.Trim().Trim('\"');
 		}
 	}
 }

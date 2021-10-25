@@ -71,11 +71,8 @@ namespace VideoLoopScreensaver
 
 		private void InitVideo()
 		{
-			if (string.IsNullOrWhiteSpace(Program.Settings.SelectedVideoPath))
+			if (!File.Exists(Program.Settings.PlaybackVideoPath))
 				FatalError("Video file not set. Please select a video file in screensaver settings.");
-
-			if (!File.Exists(Program.Settings.SelectedVideoPath))
-				FatalError($"Cannot find video file \"{Program.Settings.SelectedVideoPath}\". Make sure the file exists and the screensaver has permission to access it. Otherwise, select a new video file in screensaver settings.");
 
 			Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -94,7 +91,7 @@ namespace VideoLoopScreensaver
 			player.MediaError += (object sender, EventArgs e) =>
 				FatalError("Failed to load video. Make sure you selected a valid video file. Otherwise, the player doesn't support that video format.");
 
-			player.Load(Program.Settings.SelectedVideoPath);
+			player.Load(Program.Settings.PlaybackVideoPath);
 			player.Resume();
 		}
 

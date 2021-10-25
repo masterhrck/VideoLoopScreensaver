@@ -4,9 +4,6 @@ namespace VideoLoopScreensaver
 {
 	public interface ISettings
 	{
-		[Option(DefaultValue = "")]
-		string SelectedVideoPath { get; set; }
-
 		[Option(DefaultValue = 100)]
 		int Volume { get; set; }
 
