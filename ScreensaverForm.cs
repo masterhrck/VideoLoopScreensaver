@@ -22,6 +22,10 @@ namespace VideoLoopScreensaver
 			FormBorderStyle = FormBorderStyle.None;
 			WindowState = FormWindowState.Maximized;
 			Cursor.Hide();
+			
+			//Steal the focus
+			TopMost = true;
+			Activate();
 
 			KeyDown += (object sender, KeyEventArgs e) => Application.Exit();
 			MouseDown += (object sender, MouseEventArgs e) => Application.Exit();
